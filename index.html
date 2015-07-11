@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PCM Drafter</title>
+
+    <!-- JQuery 2.1.4 -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Angular 1.4.2 -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <!-- Bootstrap 3.3.5 CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Bootstrap 3.3.5 JS -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- FontAwesome 4.3.0 -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Angular Spotify JS : https://github.com/eddiemoore/angular-spotify-->
+    <script src="js/angular-spotify.js"></script>
+
+    <!-- My JS -->
+    <script src="js/script.js"></script>
+
+</head>
+<body>
+<main class="container-fluid" ng-app="pcmApp" ng-controller="primary">
+    <div class="text-center">
+        <h1>PCM Tournament Drafter v1</h1>
+        <h5>This application should help make drafting easier. Yeah.</h5>
+    </div>
+    <form class="form form-inline text-center" role="form" name="formSearchSummoner" novalidate="true">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search for an Summoner" name="searchSummoner" ng-model="inputSummoner" ng-change="searchArtist()" required>
+        </div>
+        <div class="form-group" ng-click="searchSummoner()">
+            <button>Test</button>
+        </div>
+    </form>
+    <div class="text-center">Searching for summoner: {{inputSummoner}}</div>
+    <li ng-repeat="element in summonerLeagueData"><img ng-src="//lkimg.zamimg.com/shared/riot/images/profile_icons/profileIcon{{element.profileIconId}}.jpg"> {{element.name}}</li>
+</main>
+</body>
+</html>
+

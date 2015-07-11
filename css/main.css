@@ -1,0 +1,28 @@
+/*
+ * Fixes problem with Bootstrap not centering
+ */
+.center-block {
+    float: none;
+}
+
+table {
+    width: 100%
+}
+
+td, th {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+th {
+    width: 27%
+}
+
+.progress, .noPadMar {
+    padding: 0;
+    margin: 0;
+}
+
+.selectedRow{
+    background-color: #A6F5A6  !important;
+}
