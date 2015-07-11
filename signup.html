@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>PCM Tournament - Sign Up</title>
+
+    <!-- JQuery 2.1.4 -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- Angular 1.4.2 -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+
+    <!-- Bootstrap 3.3.5 CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- Bootstrap 3.3.5 JS -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- FontAwesome 4.3.0 -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Angular Spotify JS : https://github.com/eddiemoore/angular-spotify-->
+    <script src="js/angular-spotify.js"></script>
+
+    <!-- My JS -->
+    <script src="js/common.js"></script>
+
+    <!-- My JS -->
+    <script src="js/signup.js"></script>
+</head>
+<body>
+<main class="container-fluid" ng-app="appSignUp" ng-controller="ctrlSignup">
+    <div class="row">
+        <img class="center-block" src="img/logo.png">
+    </div>
+    <div class="row">
+        <p class="col-lg-6 center-block" id="tournament-desc">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi consectetur consequuntur eligendi enim exercitationem expedita impedit maiores natus non obcaecati, officia praesentium quas rem sequi
+            similique sint sunt ut! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae culpa, cupiditate, exercitationem, fuga harum id ipsam ipsum iure maxime minus nemo nihil optio quasi
+            quibusdam quis sit veniam vitae.
+        </p>
+    </div>
+    <form class="form text-center" role="form" name="formSignUp" novalidate="true">
+        <div class="row">
+            <div class="col-lg-6 center-block">
+                <div class="form-group" ng-class="{'has-error' : errorName, 'has-success' : verified}" >
+                    <div class="input-group">
+                        <span class="input-group-addon">Summoner Name</span>
+                        <input id="summoner-name" class="form-control" type="text" name="summonerName" ng-model="inputSummonerName" ng-change="unverify()">
+                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="searchSummoner()">Verify</button>
+                        </span>
+                    </div>
+                </div>
+                <p class="alert alert-danger error-message"></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 center-block">
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="primaryRole">Select Primary Role:</label>
+                        <select class="form-control" id="primaryRole" ng-model="selectedFirstRole">
+                            <option>Any</option>
+                            <option>Top</option>
+                            <option>Mid</option>
+                            <option>Jungle</option>
+                            <option>ADC</option>
+                            <option>Support</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="primaryRole">Select Secondary Role:</label>
+                        <select class="form-control" id="secondaryRole" ng-model="selectedSecondRole">
+                            <option>Any</option>
+                            <option>Top</option>
+                            <option>Mid</option>
+                            <option>Jungle</option>
+                            <option>ADC</option>
+                            <option>Support</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 center-block">
+                <div class="checkbox">
+                    <label><input type="checkbox" ng-model="agreeTerms">I agree to abide by the terms and conditions for participating in a PCM sponsored tournament as found <a href="#">here</a>.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 center-block">
+                <button class="btn btn-lg" ng-model="button" ng-disabled="errorName || !verified || !agreeTerms" ng-class="{'btn-danger' : errorName || !verified || !agreeTerms, 'btn-success' : verified}" ng-click="signUp()">Sign Up</button>
+            </div>
+        </div>
+    </form>
+    {{summonerBasicData}}
+    <br>
+    <li ng-repeat="element in getData">{{element}}</li>
+</main>
+</body>
+</html>

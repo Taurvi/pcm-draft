@@ -1,3 +1,4 @@
+"use strict";
 
 // Debug Mode
 var debugMode = true;
@@ -8,8 +9,7 @@ var debugMsg = function(msg) {
         console.log("<<<|DEBUG|>>> " + msg);
 }
 
-// Global Vars
-var leagueKey = '48cf3dc2-9638-4c1b-900f-1aae5f63c8d3';
+
 
 //  Create Angular App
 var ngApp = angular.module('pcmApp', []);
@@ -22,11 +22,15 @@ ngApp.controller('primary', ['$scope', '$http', function($scope, $http) {
     $scope.summonerLeagueData = {};
 
     $scope.searchSummoner = function() {
-
+        clearError();
         $http.get('https://na.api.pvp.net/api/lol/na/v1.4/summoner/by-name/' + $scope.inputSummoner + '?api_key=' + leagueKey)
             .success(function(response) {
                 $scope.summonerLeagueData = response;
             })
+            .error(function() {
+                showError('Error, summoner not found!');
+            })
     }
+
 
 }]);
