@@ -45,6 +45,8 @@ ngApp.controller('ctrlSignup', ['$scope', '$http', function($scope, $http) {
         $scope.summonerInfo.profileIconId = $scope.summonerBasicData[key].profileIconId;
         $scope.summonerInfo.primaryRole = $scope.selectedFirstRole;
         $scope.summonerInfo.secondaryRole = $scope.selectedSecondRole;
+        $scope.summonerInfo.captain = $scope.agreeCaptain;
+        $scope.summonerInfo.substitute = $scope.agreeSub;
 
         $http.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + $scope.summonerInfo.id + '/entry?api_key=' + leagueKey)
             .success(function(response) {
@@ -80,6 +82,8 @@ var registerToDatabase = function(summonerInfo) {
     newSample.set('summonerDivision', summonerInfo.division);
     newSample.set('summonerPrimaryRole', summonerInfo.primaryRole);
     newSample.set('summonerSecondaryRole', summonerInfo.secondaryRole);
+    newSample.set('summonerCaptain', summonerInfo.captain);
+    newSample.set('summonerSubstitute', summonerInfo.substitute);
     newSample.save().then(function(newSample) {
         debugMsg('THIS FUCKING WORKED')
         $('#register-id').text(newSample.id);
