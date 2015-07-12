@@ -1,7 +1,7 @@
 "use strict";
 
 //initialize Parse library with your application ID and your app's JavaScript library key
-Parse.initialize('gL6CptrtxgnFF16KIK4yiuwKHoSOOcxipWzpoXhH', 'QQSCuwKNGnEON8tCSgWUROI7yRBXg3mWsGQWhrRx');
+Parse.initialize('eKRYapkjFAO9WJQgbrWTAxycmijkQujwXv6SuaSA', 'XZPU2LM3Unsdgs9UQOiV0TIcpR5mIZSoPp1abHvx');
 
 
 var debugMode = true;

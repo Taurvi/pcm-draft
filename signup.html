@@ -47,14 +47,13 @@
             quibusdam quis sit veniam vitae.
         </p>
     </div>
-    <form class="form text-center" role="form" name="formSignUp" novalidate="true">
+    <form class="form text-center" role="form" id="form-signup" name="formSignUp" novalidate="true">
         <div class="row">
             <div class="col-lg-6 center-block">
                 <div class="form-group" ng-class="{'has-error' : errorName, 'has-success' : verified}" >
                     <div class="input-group">
                         <span class="input-group-addon">Summoner Name</span>
                         <input id="summoner-name" class="form-control" type="text" name="summonerName" ng-model="inputSummonerName" ng-change="unverify()" required>
-                        <span class="glyphicon glyphicon-ok form-control-feedback"></span>
                         <span class="input-group-btn">
                             <button class="btn btn-default" type="button" ng-click="searchSummoner()" ng-disabled="formSignUp.summonerName.$error.required">Verify</button>
                         </span>
@@ -104,9 +103,24 @@
             </div>
         </div>
     </form>
-    {{summonerLeagueData}}
-    <br>
-    <li ng-repeat="element in getData">{{element}}</li>
+    <div class="row text-center" id="register-success">
+        <div class="col-lg-6 center-block alert alert-success">
+            <strong><p>Registration ID: <span id="register-id"></span></p></strong>
+            <p>You have successfully registered as <strong>{{inputSummonerName}}</strong>.</p>
+            <p>If there are any questions or you would like to make changes to your registeration, please email {tournament admin email here} (include your registration ID if possible).</p><br/>
+            <strong><p>Good luck and have fun, summoner!</p></strong>
+        </div>
+    </div>
+
+    <div class="row text-center" id="register-failure">
+        <div class="col-lg-6 center-block alert alert-danger">
+            <img src="img/sad_poro.png">
+            <p>Oh dear! There was a fatal error.</p>
+            <p>Please immediately notify a tournament admin by emailing {tournament admin email here}.</p><br/>
+            <strong><p>We apologize for the inconvenience!</p></strong>
+        </div>
+    </div>
+
 </main>
 </body>
 </html>

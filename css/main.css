@@ -45,3 +45,11 @@ th {
     padding: 25px;
     text-align: justify;
 }
+
+#register-success {
+    display: none;
+}
+
+#register-failure {
+    display: none;
+}
