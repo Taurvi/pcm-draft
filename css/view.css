@@ -1,0 +1,55 @@
+/*
+ * Fixes problem with Bootstrap not centering
+ */
+.center-block {
+    float: none;
+}
+
+@media screen and (min-width: 992px) {
+    body {
+        background: url("../img/background.png") no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+}
+
+table {
+    width: 100%
+}
+
+td, th {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+th {
+    width: 27%
+}
+
+.progress, .noPadMar {
+    padding: 0;
+    margin: 0;
+}
+
+.selectedRow{
+    background-color: #A6F5A6  !important;
+}
+
+.error-message {
+    display: none;
+}
+
+#tournament-desc {
+    padding: 25px;
+    text-align: justify;
+}
+
+#register-success {
+    display: none;
+}
+
+#register-failure {
+    display: none;
+}
