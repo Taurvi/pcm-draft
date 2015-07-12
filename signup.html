@@ -11,6 +11,8 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <!-- Angular 1.4.2 -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.2/angular.min.js"></script>
+    <!-- Parse 1.4.2 -->
+    <script src="https://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
 
     <!-- Bootstrap 3.3.5 CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -51,10 +53,10 @@
                 <div class="form-group" ng-class="{'has-error' : errorName, 'has-success' : verified}" >
                     <div class="input-group">
                         <span class="input-group-addon">Summoner Name</span>
-                        <input id="summoner-name" class="form-control" type="text" name="summonerName" ng-model="inputSummonerName" ng-change="unverify()">
+                        <input id="summoner-name" class="form-control" type="text" name="summonerName" ng-model="inputSummonerName" ng-change="unverify()" required>
                         <span class="glyphicon glyphicon-ok form-control-feedback"></span>
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button" ng-click="searchSummoner()">Verify</button>
+                            <button class="btn btn-default" type="button" ng-click="searchSummoner()" ng-disabled="formSignUp.summonerName.$error.required">Verify</button>
                         </span>
                     </div>
                 </div>
@@ -102,7 +104,7 @@
             </div>
         </div>
     </form>
-    {{summonerBasicData}}
+    {{summonerLeagueData}}
     <br>
     <li ng-repeat="element in getData">{{element}}</li>
 </main>
