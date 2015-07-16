@@ -68,7 +68,7 @@
                 <label><input type="checkbox" ng-model="agreeTerms" required>I agree to abide by the terms and conditions for participating in a PCM sponsored tournament as found <a href="#">here</a>.</label>
             </div>
         </div>
-    </div>
+    </div>  
     <div class="row">
         <div class="col-lg-6 center-block">
             <button class="btn btn-lg" ng-model="button" ng-disabled="errorName || !verified || !agreeTerms" ng-class="{'btn-danger' : errorName || !verified || !agreeTerms, 'btn-success' : verified}" ng-click="signUp()">Sign Up</button>

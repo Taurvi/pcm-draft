@@ -71,13 +71,68 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
                     $scope.summonerInfo.tier = 'UNRANKED';
                     $scope.summonerInfo.division = '';
                 }
+                $scope.summonerInfo.rawRank = $scope.calculateRank($scope.summonerInfo.tier, $scope.summonerInfo.division);
                 $scope.registerToDatabase($scope.summonerInfo);
             })
             .error(function() {
                 $scope.summonerInfo.tier = 'UNRANKED';
                 $scope.summonerInfo.division = '';
+                $scope.summonerInfo.rawRank = $scope.calculateRank($scope.summonerInfo.tier, $scope.summonerInfo.division);
                 $scope.registerToDatabase($scope.summonerInfo);
             })
+    }
+
+    $scope.calculateRank = function(tier, division) {
+        if(tier == 'UNRANKED') {
+            return '0';
+        } else {
+            var ranking = 0;
+            switch(tier) {
+                case 'BRONZE':
+                    ranking += 10;
+                    break;
+                case 'SILVER':
+                    ranking += 20;
+                    break;
+                case 'GOLD':
+                    ranking += 30;
+                    break;
+                case 'PLATINUM':
+                    ranking += 40;
+                    break;
+                case 'DIAMOND':
+                    ranking += 50;
+                    break;
+                case 'MASTER':
+                    ranking += 60;
+                    break;
+                case 'CHALLENGER':
+                    ranking += 70;
+                    break;
+                default:
+                    debugMsg('ERROR! Should not be here!');
+            }
+            switch(division) {
+                case 'V':
+                    ranking += 1;
+                    break;
+                case 'IV':
+                    ranking += 2;
+                    break;
+                case 'III':
+                    ranking += 3;
+                    break;
+                case 'II':
+                    ranking += 4;
+                    break;
+                case 'I':
+                    ranking += 5;
+                    break;
+                default:
+                    debugMsg('ERROR! Should not be here!');
+            }
+            return ranking;
+        }
     }
 
     $scope.registerToDatabase = function(summonerInfo) {
@@ -94,6 +149,7 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
         newParticipant.set('summonerSecondaryRole', summonerInfo.secondaryRole);
         newParticipant.set('summonerCaptain', summonerInfo.captain);
         newParticipant.set('summonerSubstitute', summonerInfo.substitute);
+        newParticipant.set('summonerRawRank', $scope.summonerInfo.rawRank);
         newParticipant.save().then(function(newParticipant) {
             debugMsg('THIS FUCKING WORKED')
             $('#register-id').text(newParticipant.id);
