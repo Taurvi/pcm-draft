@@ -69,13 +69,13 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
                     $scope.summonerInfo.division = leagueData[0].entries[0].division;
                 } else {
                     $scope.summonerInfo.tier = 'UNRANKED';
-                    $scope.summonerInfo.division = 'N/A';
+                    $scope.summonerInfo.division = '';
                 }
                 $scope.registerToDatabase($scope.summonerInfo);
             })
             .error(function() {
                 $scope.summonerInfo.tier = 'UNRANKED';
-                $scope.summonerInfo.division = 'N/A';
+                $scope.summonerInfo.division = '';
                 $scope.registerToDatabase($scope.summonerInfo);
             })
     }
