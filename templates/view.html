@@ -9,7 +9,7 @@
         <th class="col-lg-1">Captain</th>
         <th class="col-lg-1">Sub</th>
     </tr>
-    <tr ng-repeat="element in participantList | orderBy:['summonerRawRank']">
+    <tr ng-repeat="element in participantList | orderBy:['-summonerRawRank']">
         <td class="text-center"><img class="summoner-icon" ng-src="//lkimg.zamimg.com/shared/riot/images/profile_icons/profileIcon{{element.summonerProfileIconId}}.jpg"></td>
         <td>{{element.summonerName}}</td>
         <td><img class="summoner-icon center-block" ng-src="{{getRankImage(element.summonerTier, element.summonerDivision)}}"></td>
