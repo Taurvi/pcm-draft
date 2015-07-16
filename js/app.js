@@ -14,6 +14,12 @@ ngApp.config(function($routeProvider) {
        })
 });
 
+ngApp.controller('CtrlHeader', ['$scope', '$location', function($scope, $location) {
+    $scope.isActive = function (viewLocation) {
+        var active = (viewLocation === $location.path());
+        return active;
+    };
+}]);
 var debug;
 var debugArray2;
 // Creates Angular Controller
