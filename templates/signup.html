@@ -1,0 +1,94 @@
+<div class="row">
+    <p class="col-lg-6 center-block" id="tournament-desc">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. A animi consectetur consequuntur eligendi enim exercitationem expedita impedit maiores natus non obcaecati, officia praesentium quas rem sequi
+        similique sint sunt ut! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid beatae culpa, cupiditate, exercitationem, fuga harum id ipsam ipsum iure maxime minus nemo nihil optio quasi
+        quibusdam quis sit veniam vitae.
+    </p>
+</div>
+<form class="form text-center" role="form" id="form-signup" name="formSignUp" novalidate="true">
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <div class="form-group" ng-class="{'has-error' : errorName, 'has-success' : verified}" >
+                <div class="input-group">
+                    <span class="input-group-addon">Summoner Name</span>
+                    <input id="summoner-name" class="form-control" type="text" name="summonerName" ng-model="inputSummonerName" ng-change="unverify()" required>
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" ng-click="searchSummoner()" ng-disabled="formSignUp.summonerName.$error.required">Verify</button>
+                        </span>
+                </div>
+            </div>
+            <p class="alert alert-danger error-message"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="primaryRole">Select Primary Role:</label>
+                    <select class="form-control" id="primaryRole" ng-model="selectedFirstRole">
+                        <option>Any</option>
+                        <option>Top</option>
+                        <option>Mid</option>
+                        <option>Jungle</option>
+                        <option>ADC</option>
+                        <option>Support</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="primaryRole">Select Secondary Role:</label>
+                    <select class="form-control" id="secondaryRole" ng-model="selectedSecondRole">
+                        <option>Any</option>
+                        <option>Top</option>
+                        <option>Mid</option>
+                        <option>Jungle</option>
+                        <option>ADC</option>
+                        <option>Support</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="agreeCaptain">I am interested in being a Captain.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="agreeSub">I would like to play as a substitute.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="agreeTerms" required>I agree to abide by the terms and conditions for participating in a PCM sponsored tournament as found <a href="#">here</a>.</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 center-block">
+            <button class="btn btn-lg" ng-model="button" ng-disabled="errorName || !verified || !agreeTerms" ng-class="{'btn-danger' : errorName || !verified || !agreeTerms, 'btn-success' : verified}" ng-click="signUp()">Sign Up</button>
+        </div>
+    </div>
+</form>
+<div class="row text-center" id="register-success">
+    <div class="col-lg-6 center-block alert alert-success">
+        <strong><p>Registration ID: <span id="register-id"></span></p></strong>
+        <p>You have successfully registered as <strong>{{inputSummonerName}}</strong>.</p>
+        <p>If there are any questions or you would like to make changes to your registeration, please <a href="mailto: purplecasterminiontournies@gmail.com">email</a> us (include your registration ID if possible).</p><br/>
+        <strong><p>Good luck and have fun, summoner!</p></strong>
+    </div>
+</div>
+
+<div class="row text-center" id="register-failure">
+    <div class="col-lg-6 center-block alert alert-danger">
+        <img src="img/sad_poro.png">
+        <p>Oh dear! There was a fatal error.</p>
+        <p>Please immediately notify us through <a href="mailto: purplecasterminiontournies@gmail.com">email</a>.</p><br/>
+        <strong><p>We apologize for the inconvenience!</p></strong>
+    </div>
+</div>
