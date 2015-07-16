@@ -114,19 +114,52 @@ ngApp.controller('CtrlView', ['$scope', '$http', function($scope, $http) {
     $scope.readDatabase = function () {
         var Participants = Parse.Object.extend("Participants");
         var queryParticipants = new Parse.Query(Participants);
-
+        var tempArray = [];
         queryParticipants.find({
             success: function (results) {
                 $scope.participantList = [];
-                debugResults2 = results;
                 results.map(function(participant) {
-                    $scope.participantList.push(participant.attributes);
+                    tempArray.push(participant.attributes);
                 })
+                $scope.$apply(function() {
+                    debugMsg("apply was run!");
+                    $scope.participantList = tempArray;
+                });
                 debugResult = $scope.participantList;
             },
             error: function (error) {
                 alert("Error: " + error.code + " " + error.message);
             }
         });
+    }
+
+    $scope.getRankImage = function(league, division) {
+        if (league == 'UNRANKED') {
+            return "http://lkimg.zamimg.com/images/medals/unknown.png";
+        } else {
+            var getLeague = league.toLowerCase();
+            var getDivision;
+
+            switch(division) {
+                case 'I':
+                    getDivision = '1';
+                    break;
+                case 'II':
+                    getDivision = '2';
+                    break;
+                case 'III':
+                    getDivision = '3';
+                    break;
+                case 'IV':
+                    getDivision = '4';
+                    break;
+                case 'V':
+                    getDivision = '5';
+                    break;
+                default:
+                    debugMsg("Error! Should not have gotten here!")
+            }
+            return 'http://lkimg.zamimg.com/images/medals/' + getLeague + '_' + getDivision + '.png';
+        }
     }
 }]);

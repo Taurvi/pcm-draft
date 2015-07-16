@@ -1,1 +1,22 @@
-<div>THIS WORKED KINDA {{readDatabase()}}</div>
+<table class="table-responsive table-striped table-bordered" ng-init="readDatabase()">
+    <tr>
+        <th class="col-lg-1"></th>
+        <th class="col-lg-3">Summoner Name</th>
+        <th class="col-lg-1"></th>
+        <th class="col-lg-3">Solo Rank</th>
+        <th class="col-lg-1">Primary Role</th>
+        <th class="col-lg-1">Secondary Role</th>
+        <th class="col-lg-1">Captain</th>
+        <th class="col-lg-1">Sub</th>
+    </tr>
+    <tr ng-repeat="element in participantList">
+        <td class="text-center"><img class="summoner-icon" ng-src="//lkimg.zamimg.com/shared/riot/images/profile_icons/profileIcon{{element.summonerProfileIconId}}.jpg"></td>
+        <td>{{element.summonerName}}</td>
+        <td><img class="summoner-icon center-block" ng-src="{{getRankImage(element.summonerTier, element.summonerDivision)}}"></td>
+        <td>{{element.summonerTier}} {{element.summonerDivision}}</td>
+        <td>{{element.summonerPrimaryRole}}</td>
+        <td>{{element.summonerSecondaryRole}}</td>
+        <td>{{element.summonerCaptain}}</td>
+        <td>{{element.summonerSubstitute}}</td>
+    </tr>
+</table>

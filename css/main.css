@@ -53,3 +53,12 @@ th {
 #register-failure {
     display: none;
 }
+
+.summoner-icon {
+    height: 48px;
+    width: 48px;
+}
+
+th {
+    text-align: center;
+}
