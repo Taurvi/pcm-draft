@@ -174,6 +174,8 @@ var debugResult;
 ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope, $http, Crossfilter) {
 
     $scope.participantList = [];
+    $scope.$ngc;
+
     $scope.readDatabase = function () {
         var Participants = Parse.Object.extend("Participants");
         var queryParticipants = new Parse.Query(Participants);
@@ -188,6 +190,7 @@ ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope,
                     debugMsg("apply was run!");
                     $scope.participantList = tempArray;
                     $scope.$ngc = new Crossfilter($scope.participantList, ['summonerName'])
+                    $scope.$ngc.addDimension(['summonerTier']);
                 });
                 debugResult = $scope.participantList;
             },
@@ -197,6 +200,26 @@ ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope,
 
         });
     }
+
+    $scope.ranks = ['CHALLENGER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE'];
+    $scope.selection =  ['CHALLENGER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE'];
+
+    $scope.toggleSelection = function($ngc, rankName) {
+        var idx = $scope.selection.indexOf(rankName);
+        // is currently selected
+        if (idx > -1) {
+            $scope.selection.splice(idx, 1);
+        }
+        // is newly selected
+        else {
+            $scope.selection.push(rankName);
+        }
+        $scope.$ngc.filterBy('summonerTier', $scope.selection, $ngc.filters.inArray('some'));
+    };
+
+
+
+    debugModel = $scope.multiple;
 
     $scope.getRankImage = function(league, division) {
         if (league == 'UNRANKED') {

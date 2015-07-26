@@ -1,4 +1,18 @@
 <label for="searchSummoner">Search by Summoner: </label><input type="text" id="searchSummoner" ng-model="searchSummoner" ng-change="$ngc.filterBy('summonerName', searchSummoner, $ngc.filters.fuzzy());">
+
+<label ng-repeat="rank in ranks">
+    <input
+            type="checkbox"
+            name="selectedFruits[]"
+            value="{{rank}}"
+            ng-checked="selection.indexOf(rank) > -1"
+            ng-click="toggleSelection($ngc, rank)"
+            > {{rank}}
+</label>
+
+<p ng-repeat="element in multiple">{{element}}</p>
+
+
 <table class="table-responsive table-striped table-bordered" ng-init="readDatabase()">
     <tr>
         <th class="col-lg-1"></th>
