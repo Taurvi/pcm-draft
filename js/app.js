@@ -1,6 +1,6 @@
 
 //  Create Angular App
-var ngApp = angular.module('ngApp', ['ngRoute']);
+var ngApp = angular.module('ngApp', ['ngRoute', 'ngCrossfilter']);
 
 ngApp.config(function($routeProvider) {
     $routeProvider
@@ -171,7 +171,8 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
 
 var debugResult;
 
-ngApp.controller('CtrlView', ['$scope', '$http', function($scope, $http) {
+ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope, $http, Crossfilter) {
+
     $scope.participantList = [];
     $scope.readDatabase = function () {
         var Participants = Parse.Object.extend("Participants");
@@ -186,12 +187,14 @@ ngApp.controller('CtrlView', ['$scope', '$http', function($scope, $http) {
                 $scope.$apply(function() {
                     debugMsg("apply was run!");
                     $scope.participantList = tempArray;
+                    $scope.$ngc = new Crossfilter($scope.participantList, ['summonerName'])
                 });
                 debugResult = $scope.participantList;
             },
             error: function (error) {
                 alert("Error: " + error.code + " " + error.message);
             }
+
         });
     }
 
