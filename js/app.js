@@ -63,8 +63,14 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
         $scope.summonerInfo.profileIconId = $scope.summonerBasicData[key].profileIconId;
         $scope.summonerInfo.primaryRole = $scope.selectedFirstRole;
         $scope.summonerInfo.secondaryRole = $scope.selectedSecondRole;
-        $scope.summonerInfo.captain = $scope.agreeCaptain;
-        $scope.summonerInfo.substitute = $scope.agreeSub;
+        if ($scope.agreeCaptain)
+            $scope.summonerInfo.captain = $scope.agreeCaptain;
+        else
+            $scope.summonerInfo.captain = false;
+        if($scope.agreeSub)
+            $scope.summonerInfo.substitute = $scope.agreeSub;
+        else
+            $scope.summonerInfo.substitute = false;
 
         $http.get('https://na.api.pvp.net/api/lol/na/v2.5/league/by-summoner/' + $scope.summonerInfo.id + '/entry?api_key=' + leagueKey)
             .success(function(response) {
@@ -190,7 +196,7 @@ ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope,
                     debugMsg("apply was run!");
                     $scope.participantList = tempArray;
                     $scope.$ngc = new Crossfilter($scope.participantList, ['summonerName'])
-                    $scope.$ngc.addDimension(['summonerTier']);
+                    $scope.$ngc.addDimension(['summonerTier', 'summonerCaptain', 'summonerSubstitute']);
                 });
                 debugResult = $scope.participantList;
             },
@@ -201,21 +207,35 @@ ngApp.controller('CtrlView', ['$scope', '$http', 'Crossfilter', function($scope,
         });
     }
 
+    $scope.fuzzyLowercase = function (expected, actual) {
+        var regExp = new RegExp(expected.toLowerCase());
+        return actual.toLowerCase().match(regExp, 'i');
+    }
+
     $scope.ranks = ['CHALLENGER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE'];
     $scope.selection =  ['CHALLENGER', 'MASTER', 'DIAMOND', 'PLATINUM', 'GOLD', 'SILVER', 'BRONZE'];
 
-    $scope.toggleSelection = function($ngc, rankName) {
-        var idx = $scope.selection.indexOf(rankName);
+    $scope.toggleMultiSelection = function($ngc, type, option, filterSelection) {
+        var idx = $scope.selection.indexOf(option);
         // is currently selected
         if (idx > -1) {
-            $scope.selection.splice(idx, 1);
+            filterSelection.splice(idx, 1);
         }
         // is newly selected
         else {
-            $scope.selection.push(rankName);
+            filterSelection.push(option);
         }
-        $scope.$ngc.filterBy('summonerTier', $scope.selection, $ngc.filters.inArray('some'));
+        $scope.$ngc.filterBy(type, filterSelection, $ngc.filters.inArray('some'));
     };
+
+    $scope.toggleSelection = function($ngc, checkbox, filterName, expected) {
+        console.log(checkbox);
+        if (checkbox) {
+            $ngc.filterBy(filterName, expected);
+        } else {
+            $ngc.unfilterBy(filterName);
+        }
+    }
 
 
 
