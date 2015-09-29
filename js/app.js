@@ -89,7 +89,7 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
             .error(function() {
                 $scope.summonerInfo.tier = 'UNRANKED';
                 $scope.summonerInfo.division = '';
-                $scope.summonerInfo.rawRank = $scope.calculateRank($scope.summonerInfo.tier, $scope.summonerInfo.division);
+                $scope.summonerInfo.rawRank = 0;
                 $scope.registerToDatabase($scope.summonerInfo);
             })
     }
@@ -163,12 +163,12 @@ ngApp.controller('CtrlSignup', ['$scope', '$http', function($scope, $http) {
         newParticipant.set('summonerSubstitute', summonerInfo.substitute);
         newParticipant.set('summonerRawRank', $scope.summonerInfo.rawRank);
         newParticipant.save().then(function(newParticipant) {
-            debugMsg('THIS FUCKING WORKED')
+            debugMsg('THIS WORKED')
             $('#register-id').text(newParticipant.id);
             $('#form-signup').css('display', 'none');
             $('#register-success').css('display', 'initial');
         }, function() {
-            debugMsg('THIS FUCKING FAILED')
+            debugMsg('THIS FAILED')
             $('#form-signup').css('display', 'none');
             $('#register-failure').css('display', 'initial');
         })
